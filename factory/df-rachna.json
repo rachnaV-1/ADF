@@ -1,0 +1,9 @@
+{
+	"name": "df-rachna",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "4b892afb-f3f4-4151-9af1-7d81cdef87c7",
+		"tenantId": "e23a57ee-a52d-474d-b96d-0daeb62655cb"
+	}
+}

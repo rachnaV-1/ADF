@@ -1,0 +1,65 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "cityName",
+					"value": {
+						"value": "@substring(pipeline().parameters.addressLine,add(indexof(pipeline().parameters.addressLine,'City:'),6),sub(sub(indexof(pipeline().parameters.addressLine,'State:'),2),add(indexof(pipeline().parameters.addressLine,'City'),6)))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "src",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"columnCount"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"parameters": {
+			"addressLine": {
+				"type": "string",
+				"defaultValue": "Address: 221 M.G. Road Road. City: Kolkata. State: West Bengal"
+			}
+		},
+		"variables": {
+			"cityName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-07-30T16:39:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
